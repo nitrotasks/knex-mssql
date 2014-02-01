@@ -84,9 +84,8 @@ exports.schemaGrammar = _.defaults({
   // Compile an index creation command.
   compileKey: function(builder, command, type) {
     var columns = this.columnize(command.columns);
-    // var table = this.wrapTable(builder);
-    return 'create ' + type + ' (' + command.index + ') on ' + builder.table + '(' + columns + ')'
-    // return 'alter table ' + table + " add " + type + " " + command.index + "(" + columns + ")";
+    var table = this.wrapTable(builder);
+    return 'alter table ' + table + " add constraint " + command.index+ " " + type + "(" + columns + ")";
   },
 
   // Compile a drop column command.

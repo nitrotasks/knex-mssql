@@ -6,47 +6,58 @@ var knex = Knex.initialize({
   connection: require('./keychain')
 });
 
+var table = 'user';
+
 var createTable = function () {
-  return knex.schema.createTable('my_awesome_table', function (table) {
-    table.increments('id').unsigned()
+  return knex.schema.createTable(table, function (table) {
+    table.increments('id')
     table.string('name', 100)
-    table.string('email', 100).index()
+    table.string('email', 100).unique()
     table.string('password', 60)
-    table.integer('pro').unsigned()
-    table.timestamps()
+    table.integer('pro')
+    table.dateTime('created_at').defaultTo(knex.raw('getdate()'))
   });
 };
 
 var hasTable = function () {
-  return knex.schema.hasTable('my_awesome_table')
+  return knex.schema.hasTable(table)
 };
 
 var dropTable = function () {
   return knex.schema.dropTable('my_awesome_table')
 };
 
-var select = function () {
-  return knex('Test').select();
+var selectAll = function (id) {
+  return knex(table).select(id);
+};
+
+var selectRow = function (id) {
+  return knex(table).select().where({
+    id: id
+  });
 };
 
 var insert = function () {
-  return knex('Test').returning('id').insert({
-    name: 'Cheese Pie'
+  return knex(table).returning('id').insert({
+    name: 'Willy Wonka',
+    email: 'willy@thechocolatefactory.com',
+    password: 'supercalifragilisticexpialidocious',
+    pro: 1
   });
 };
 
 var update = function () {
-  return knex('Test').update({
+  return knex(table).update({
     name: 'Cheese Cake'
   }).where({
     name: 'Cheese Pie'
   })
 };
 
-var del = function () {
-  return knex('Test').del().where({
-    name: 'Cheese Cake'
-  });
+var delEmail = function (email) {
+  return knex(table).del().where({
+    email: email
+  })
 };
 
 // select().then(function (data) {
@@ -71,8 +82,20 @@ var del = function () {
 //   console.log(response);
 // });
 
-
-createTable().then(function () {
-  console.log(arguments);
-});
+hasTable().then(function (exists) {
+  if (! exists) { return createTable(); }
+}).then(function () {
+  return selectAll();
+}).then(function (rows) {
+  console.log('all rows', rows);
+  return insert();
+}).then(function (id) {
+  console.log('id', id)
+  return selectRow(id);
+}).then(function (rows) {
+  console.log('single row', rows);
+  return delEmail('willy@thechocolatefactory.com');
+}).then(function (affected) {
+  console.log('deleted', affected)
+})
 

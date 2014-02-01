@@ -27,6 +27,14 @@ exports.Client = ServerBase.extend({
     this.schemaGrammar = schemaGrammar;
   },
 
+  poolDefaults: {
+    max: 1,
+    min: 1,
+    destroy: function (connection) {
+      connection.close();
+    }
+  },
+
   // Runs the query on the specified connection, providing the bindings
   // and any other necessary prep work.
   runQuery: function(connection, sql, bindings, builder) {
@@ -72,6 +80,7 @@ exports.Client = ServerBase.extend({
   // Get a raw connection, called by the `pool` whenever a new
   // connection needs to be added to the pool.
   getRawConnection: function() {
+    console.log('connecting')
     var connection = new mssql.Connection(this.connectionSettings);
     return Promise.promisify(connection.connect, connection)().yield(connection);
   },
