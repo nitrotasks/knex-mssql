@@ -1,0 +1,29 @@
+{
+  "name": "knex-mssql",
+  "version": "0.0.1",
+  "description": "A mssql adapter for knex",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CaffeinatedCode/knex-mssql.git"
+  },
+  "keywords": [
+    "knex",
+    "mssql",
+    "sql",
+    "server",
+    "adapter"
+  ],
+  "contributors": [
+    "George Czabania <george@czabania.com>",
+    "Jono Cooper <jono@jonocooper.com>"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaffeinatedCode/knex-mssql/issues"
+  },
+  "homepage": "https://github.com/CaffeinatedCode/knex-mssql"
+}
