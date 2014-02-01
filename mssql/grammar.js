@@ -1,8 +1,8 @@
 // MS SQL Grammar
 // -------
 var _           = require('lodash');
-var Helpers     = require('knex/lib/helpers').Helpers;
-var baseGrammar = require('knex/clients/base/grammar').baseGrammar;
+var Helpers     = req('knex/lib/helpers').Helpers;
+var baseGrammar = req('knex/clients/base/grammar').baseGrammar;
 
 // Extends the standard sql grammar.
 exports.grammar = _.defaults({

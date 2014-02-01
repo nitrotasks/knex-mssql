@@ -5,14 +5,16 @@
 // which needs to be added as a dependency to the project
 // using this database.
 var _     = require('lodash');
-var mssql = require('mssql');
+var mssql = req('mssql');
 
 // All other local project modules needed in this scope.
-var ServerBase        = require('knex/clients/server/base').ServerBase;
-var Promise           = require('knex/lib/promise').Promise;
+var ServerBase        = req('knex/clients/server/base').ServerBase;
+var Promise           = req('knex/lib/promise').Promise;
 
-var grammar           = require('./mssql/grammar').grammar;
-var schemaGrammar     = require('./mssql/schemagrammar').schemaGrammar;
+var grammar           = req('./mssql/grammar').grammar;
+var schemaGrammar     = req('./mssql/schemagrammar').schemaGrammar;
+
+exports.ballin = true;
 
 // Constructor for the MSSSQLClient.
 exports.Client = ServerBase.extend({
@@ -72,8 +74,6 @@ exports.Client = ServerBase.extend({
   getRawConnection: function() {
     var connection = new mssql.Connection(this.connectionSettings);
     return Promise.promisify(connection.connect, connection)().yield(connection);
-    // connect = Promise.promisify(mssql.connect, mssql)
-    // return connect(this.connectionSettings).yield(connect);
   },
 
   // Used to explicitly close a connection, called internally by the pool

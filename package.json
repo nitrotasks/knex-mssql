@@ -1,6 +1,6 @@
 {
   "name": "knex-mssql",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A mssql adapter for knex",
   "main": "index.js",
   "scripts": {
@@ -32,5 +32,8 @@
   "peerDependencies": {
     "knex": "0.5.x",
     "mssql": "0.5.x"
+  },
+  "devDependencies": {
+    "parent-require": "~1.0.0"
   }
 }
