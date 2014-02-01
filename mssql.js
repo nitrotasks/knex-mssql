@@ -14,7 +14,6 @@ var Promise           = require('../../lib/promise').Promise;
 
 var grammar           = require('./mssql/grammar').grammar;
 var schemaGrammar     = require('./mssql/schemagrammar').schemaGrammar;
-var SqlString         = require('./mssql/SqlString');
 
 // Constructor for the MSSSQLClient.
 exports.Client = ServerBase.extend({
