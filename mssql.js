@@ -8,9 +8,8 @@ var _     = require('lodash');
 var mssql = require('mssql');
 
 // All other local project modules needed in this scope.
-var ServerBase        = require('./base').ServerBase;
-var Helpers           = require('../../lib/helpers').Helpers;
-var Promise           = require('../../lib/promise').Promise;
+var ServerBase        = require('knex/clients/server/base').ServerBase;
+var Promise           = require('knex/lib/promise').Promise;
 
 var grammar           = require('./mssql/grammar').grammar;
 var schemaGrammar     = require('./mssql/schemagrammar').schemaGrammar;

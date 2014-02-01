@@ -1,7 +1,9 @@
-// SQLite3 SchemaGrammar
-// -------
+
+// MS SQL SchemaGrammar
+// --------------------
+
 var _                 = require('lodash');
-var baseSchemaGrammar = require('../../base/schemagrammar').schemaGrammar;
+var baseSchemaGrammar = require('knex/clients/base/schemagrammar').schemaGrammar;
 
 exports.schemaGrammar = _.defaults({
 
