@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/CaffeinatedCode/knex-mssql/issues"
   },
-  "homepage": "https://github.com/CaffeinatedCode/knex-mssql"
+  "homepage": "https://github.com/CaffeinatedCode/knex-mssql",
+  "dependencies": {
+    "lodash": "~2.4.1"
+  }
 }

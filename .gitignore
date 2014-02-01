@@ -1,0 +1,19 @@
+# Project Specific #
+####################
+
+# OS generated files #
+######################
+.DS_Store*
+._*
+ehthumbs.db
+Thumbs.db
+
+# Folders #
+###########
+.sass-cache
+node_modules
+
+# Misc #
+########
+*.sublime-project
+*.sublime-workspace
