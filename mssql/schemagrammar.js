@@ -78,7 +78,10 @@ exports.schemaGrammar = _.defaults({
 
   // Compile a plain index key command.
   compileIndex: function(builder, command) {
-    return this.compileKey(builder, command, 'index');
+    var columns = this.columnize(command.columns);
+    var table = this.wrapTable(builder);
+    return 'create nonclustered index ' + command.index + ' on ' + table + ' (' + columns + ')';
+    // return this.compileKey(builder, command, 'index');
   },
 
   // Compile an index creation command.

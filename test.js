@@ -12,10 +12,20 @@ var createTable = function () {
   return knex.schema.createTable(table, function (table) {
     table.increments('id')
     table.string('name', 100)
-    table.string('email', 100).unique()
+    table.string('email', 100).unique().index()
     table.string('password', 60)
     table.integer('pro')
     table.dateTime('created_at').defaultTo(knex.raw('getdate()'))
+  });
+};
+
+createOtherTable = function () {
+  return knex.schema.createTable('list', function (table) {
+    table.increments('id')
+    table.integer('userId')
+      .references('id').inTable('user')
+      .onDelete('cascade')
+      .onUpdate('cascade')
   });
 };
 
@@ -99,3 +109,7 @@ hasTable().then(function (exists) {
   console.log('deleted', affected)
 })
 
+
+// createOtherTable().then(function (results) {
+//   console.log(results);
+// });
