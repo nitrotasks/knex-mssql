@@ -17,7 +17,7 @@ exports.grammar = _.defaults({
     var returning = builder.flags.returning;
 
     if (builder.type === 'insert' && returning) {
-      response = response[0][returning];
+      response = _.pluck(response, returning);
     }
 
     if (builder.type === 'delete' || builder.type === 'update') {

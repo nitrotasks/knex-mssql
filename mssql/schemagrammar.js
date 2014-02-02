@@ -219,6 +219,15 @@ exports.schemaGrammar = _.defaults({
     }
   },
 
+  // Get the SQL for a nullable column modifier.
+  modifyNullable: function(blueprint, column) {
+    if (column.isNullable === false) {
+      return ' not null';
+    } else if (column.isNullable === true) {
+      return ' null';
+    }
+  },
+
   // Get the SQL for a comment column modifier.
   modifyComment: function(builder, column) {
     // TODO: Look into limiting this length.

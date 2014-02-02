@@ -9,6 +9,6 @@
   }
 
   // Add client to Knex
-  Knex.Clients.mssql = '../../mssql';
+  Knex.Clients.mssql = '../knex-mssql/mssql';
 
 }());

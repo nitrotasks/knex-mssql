@@ -56,31 +56,13 @@ exports.Client = ServerBase.extend({
     i = 0;
     sql = sql.replace(/\?/g, function() { return '@' + i++; })
 
-    console.log('\nNew Request')
-    console.log('SQL:', sql)
-    console.log('Input:', bindings)
+    return Promise.promisify(request.query, request)(sql);
 
-    return Promise.promisify(request.query, request)(sql).then(
-
-      // Response handler
-      function (response) {
-        console.log('Response:', response);
-        return response;
-      },
-
-      // Error handler
-      function (err) {
-        console.log('Error:', err);
-        throw err;
-      }
-
-    );
   },
 
   // Get a raw connection, called by the `pool` whenever a new
   // connection needs to be added to the pool.
   getRawConnection: function() {
-    console.log('connecting')
     var connection = new mssql.Connection(this.connectionSettings);
     return Promise.promisify(connection.connect, connection)().yield(connection);
   },
