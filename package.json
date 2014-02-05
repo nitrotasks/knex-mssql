@@ -1,6 +1,6 @@
 {
   "name": "knex-mssql",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A mssql adapter for knex",
   "main": "index.js",
   "scripts": {

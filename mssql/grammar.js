@@ -1,5 +1,7 @@
 // MS SQL Grammar
-// -------
+// --------------
+
+
 var _           = require('lodash');
 var Helpers     = req('knex/lib/helpers').Helpers;
 var baseGrammar = req('knex/clients/base/grammar').baseGrammar;
@@ -7,7 +9,7 @@ var baseGrammar = req('knex/clients/base/grammar').baseGrammar;
 // Extends the standard sql grammar.
 exports.grammar = _.defaults({
 
-  // The keyword identifier wrapper format.
+  // Wrap keywords in single quotes
   wrapValue: function(value) {
     return (value !== '*' ? Helpers.format('"%s"', value) : "*");
   },
@@ -28,6 +30,7 @@ exports.grammar = _.defaults({
   },
 
   // Compiles a `delete` query.
+  // Adds 'output @@ROWCOUNT' to return the number of affected rows
   compileDelete: function(qb) {
     var table = this.wrapTable(qb.table);
     var where = !_.isEmpty(qb.wheres) ? this.compileWheres(qb) : '';
@@ -35,6 +38,7 @@ exports.grammar = _.defaults({
   },
 
   // Compiles an `update` query.
+  // Adds 'output @@ROWCOUNT' to return the number of affected rows
   compileUpdate: function(qb) {
     var values = qb.values;
     var table = this.wrapTable(qb.table), columns = [];
@@ -45,6 +49,8 @@ exports.grammar = _.defaults({
     return 'update ' + table + ' set ' + columns.join(', ') + ' output @@ROWCOUNT ' + this.compileWheres(qb);
   },
 
+  // Compiles an `insert` query.
+  // Adds 'this.compileReturning(qb)' to return insertId
   compileInsert: function (qb) {
     var values      = qb.values;
     var table       = this.wrapTable(qb.table);
@@ -62,6 +68,7 @@ exports.grammar = _.defaults({
     return "insert into " + table + " (" + this.columnize(columns) + ") " + this.compileReturning(qb) + " values " + paramBlocks.join(', ');
   },
 
+  // Compiles code to return the insert value for a row
   compileReturning: function(qb) {
     var sql = '';
     if (qb.flags.returning) {

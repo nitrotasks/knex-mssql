@@ -14,8 +14,6 @@ var Promise           = req('knex/lib/promise').Promise;
 var grammar           = req('./mssql/grammar').grammar;
 var schemaGrammar     = req('./mssql/schemagrammar').schemaGrammar;
 
-exports.ballin = true;
-
 // Constructor for the MSSSQLClient.
 exports.Client = ServerBase.extend({
 
